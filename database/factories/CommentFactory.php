@@ -4,12 +4,12 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
-use App\Models\Group;
+use App\Models\Post;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Comment>
  */
-class PostFactory extends Factory
+class CommentFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,9 +19,9 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            
+            //
             'content' => fake()->text(255),
-            'group_id' => fake()->boolean(20) ? Group::all()->random()->id : null, //20% of the time, a post is associated with a random group
+            'user_id' => User::all()->random()->id,
         ];
     }
 }

@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->string('content', 255);
             $table->timestamps();
-
-            $table->bigInteger('group_id')->references('id')->on('groups')
-                ->onDelete('cascade')->onUpdate('cascade')->nullable();
-
+            $table->string('content', 255);
+            
             $table->bigInteger('user_id')->references('id')->on('users')
+            ->onDelete('cascade')->onUpdate('cascade');
+
+            $table->bigInteger('post_id')->references('id')->on('posts')
                 ->onDelete('cascade')->onUpdate('cascade');
         });
     }
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('comments');
     }
 };
