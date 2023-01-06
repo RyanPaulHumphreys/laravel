@@ -4,6 +4,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Group;
+use App\Models\Image;
 use App\Models\RecoveryInformation;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -24,7 +25,7 @@ class UserTableSeeder extends Seeder
         //Generates 3 posts (using the post factory) for each user created in the user factory
         User::factory()
             ->count(50)
-            ->has(Post::factory()->hasComments(4)->count(3))
+            ->has((Post::factory()->has(Image::factory())->hasComments(4))->count(3))
             ->has(RecoveryInformation::factory()->count(1))
             ->create();
         

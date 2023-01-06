@@ -21,6 +21,9 @@ return new class extends Migration
             $table->bigInteger('group_id')->references('id')->on('groups')
                 ->onDelete('cascade')->onUpdate('cascade')->nullable();
 
+            $table->bigInteger('image_id')->references('id')->on('images')
+                ->onDelete('cascade')->onUpdate('cascade')->nullable();
+
             $table->bigInteger('user_id')->references('id')->on('users')
                 ->onDelete('cascade')->onUpdate('cascade');
         });

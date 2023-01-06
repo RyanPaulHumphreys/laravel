@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Comment;
+use App\Models\Image;
 
 class PostTableSeeder extends Seeder
 {
@@ -24,6 +25,9 @@ class PostTableSeeder extends Seeder
         $p->user_id = User::all()->random()->id;
         $p->group_id = 1;
         $p->save();
-        Post::factory()->count(150)->has(Comment::factory()->count(rand(2,5)))->create();
+        Post::factory()->count(150)
+            ->has(Comment::factory()->count(rand(2,5)))
+            ->has(Image::factory())
+            ->create();
     }
 }

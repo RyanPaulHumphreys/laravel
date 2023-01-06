@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'content',
+        'image_id'
+      ];
 
     public function user()
     {
@@ -22,5 +26,10 @@ class Post extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function image()
+    {
+        return $this->hasOne(Image::class);
     }
 }
