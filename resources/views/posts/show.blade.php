@@ -1,26 +1,40 @@
 @extends('layouts.app')
 
 @section('title', 'Post')
+    <title>Post by {{App\Models\User::find($post->user_id)->name}}</title>
 
 @section('content')
-    <div>
-        <ul>
-            <li>User: {{App\Models\User::find($post->user_id)->name}}</li>
-            <li>Posted: {{$post->created_at}}</li>
-
-
-            @if ($post->group_id != null)
-                <li> Group: {{$post->group_id}}</li>
-            @endif
-            <li>{{$post->content}}</li>
-        </ul>
+<head>
+    <div class="post">
+    <link href="/css/app.css" rel="stylesheet">
+        <div class="post-content">
+            <ul>
+                <li class="bold">{{App\Models\User::find($post->user_id)->name}}</li>
+                <li>Posted: {{$post->created_at}}</li>
+                @if ($post->group_id != null)
+                    <li> Group: {{App\Models\Group::find($post->group_id)->name}}</li>
+                @endif
+                <li>{{$post->content}}</li>
+            </ul>
+        </div>
+        @if($post->image()->get()->first() != null)
+                <img src="{{$post->image()->get()->first()->src}}"/>   
+            </div>
+        @endif 
     </div>
-    <div>
+    </div>  
+</head>
+<body>
+    <div class="comment-section">
         <h2>Comments: </h2>
         <ul>
             @foreach ($comments as $comment)
-                <li style="width:500px;height:100px;border:1px solid #000;"><p>{{App\Models\User::find($comment->user_id)->name}} : {{$comment->content}}</p></li>
+                <li class="comment-content">
+                    <p class="bold">{{App\Models\User::find($comment->user_id)->name}}</p> 
+                    <p> {{$comment->content}}</p>
+                </li>
             @endforeach
         </ul>
     </div>
+</body>
 @endsection

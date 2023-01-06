@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div>
+    <head>
         <p>Groups: </p>
         <ul>
             @foreach ($groups as $group)
@@ -14,5 +14,10 @@
                 </li>
             @endforeach
         </ul>
-    </div>
+        @livewireStyles
+    </head>
+    <body>
+        @livewireScripts
+    </body>
+
 @endsection

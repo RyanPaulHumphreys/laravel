@@ -39,6 +39,7 @@ class PostController extends Controller
     public function create()
     {
         //
+        return view('posts.create');
     }
 
     /**
@@ -50,6 +51,21 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+        $validData = $request->validate(
+            [
+                'content' => 'required|max:255',
+                'group_id' => 'nullable|integer',
+            ]
+        );
+
+        $p = new Post;
+        $p->content = $validData['content'];
+        $p->group_id = $validData['group_id'];
+        $p->user_id = auth()->id();
+        $p->save();
+        
+        session()->flash('message', 'Post submitted');
+        return redirect()->route('posts.index');
     }
 
     /**
