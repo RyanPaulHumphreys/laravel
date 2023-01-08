@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Notifications\NewGroupPost;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Image;
+use App\Notifications\NewComment;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class PostController extends Controller
 {
@@ -83,6 +87,19 @@ class PostController extends Controller
 
             $p->image_id = $img->id;
         }
+
+        $users = new Collection();
+        foreach(User::all() as $user)
+        {
+            foreach($user->groups()->get() as $group)
+            {
+                if($group->id == $validData['group_id'])
+                {
+                    $users->add($user);
+                }
+            }
+        }
+        Notification::send($users, new NewGroupPost($p->id));
         
         session()->flash('message', 'Post submitted');
         return redirect()->route('posts.index');
@@ -97,7 +114,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         //
-        $comments = Comment::all()->where('post_id', $post->id);
+        $comments = Comment::where('post_id', $post->id)->paginate(10);
         return view('posts.show', ['post' => $post, 'comments' => $comments]);
     }
 
@@ -110,6 +127,7 @@ class PostController extends Controller
     public function edit($id)
     {
         //
+        return view('posts.edit', ['post' => Post::find($id)]);
     }
 
     /**
@@ -122,6 +140,37 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validData = $request->validate(
+            [
+                'content' => 'required|max:255',
+                'group_id' => 'nullable|integer',
+                'image' => 'nullable|image|max:2048'
+            ]
+        );
+        $p = Post::find($id);
+        $img = $p->image()->get()->first();
+
+        if (auth()->id() == $p->user_id || auth()->user()->role == "admin") {
+
+            $p->content = $validData['content'];
+            $p->group_id = $validData['group_id'];
+
+            if ($request['image'] != null) {
+                $imgName = time() . '.' . $request['image']->extension();
+
+                $request->image->move(public_path('images'), $imgName);
+
+                $img->src = asset('images') . "/" . $imgName;
+                $img->mime_type = $request->file('image')->getClientOriginalExtension();
+                $img->post_id = $p->id;
+                $img->save();
+
+                $p->image_id = $img->id;
+            }
+
+            $p->save();
+            return redirect()->route('posts.show',['post' => $p]);
+        }
     }
 
     /**
@@ -133,5 +182,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+        $res = Post::find($id)->delete();
+        return redirect()->route('posts.index');
     }
 }
