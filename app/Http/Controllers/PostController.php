@@ -6,6 +6,7 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -27,8 +28,10 @@ class PostController extends Controller
         {
             $groups = [];
         }
-        $posts = Post::whereIn('group_id', array_column($groups,'id'))->orWhere('group_id', null)->get();
-        return view('posts.index', ['posts' => $posts]);
+
+        $posts = Post::whereIn('group_id', array_column($groups,'id'))->orWhere('group_id', null);
+        
+        return view('posts.index', ['posts' => $posts->orderByDesc('created_at')->paginate(10)]);
     }
 
     /**
@@ -51,18 +54,35 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+
         $validData = $request->validate(
             [
                 'content' => 'required|max:255',
                 'group_id' => 'nullable|integer',
+                'image' => 'nullable|image'
             ]
         );
-
+        
         $p = new Post;
         $p->content = $validData['content'];
         $p->group_id = $validData['group_id'];
         $p->user_id = auth()->id();
         $p->save();
+
+        if($request['image'] != null)
+        {
+            $imgName = time() . '.' . $request['image']->extension();
+
+            $request->image->move(public_path('images'), $imgName);
+
+            $img = new Image;
+            $img->src = asset('images')."/".$imgName;
+            $img->mime_type = $request->file('image')->getClientOriginalExtension();
+            $img->post_id = $p->id;
+            $img->save();
+
+            $p->image_id = $img->id;
+        }
         
         session()->flash('message', 'Post submitted');
         return redirect()->route('posts.index');

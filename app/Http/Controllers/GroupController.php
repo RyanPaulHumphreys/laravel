@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class GroupController extends Controller
 {
@@ -16,7 +17,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $groups = Group::all();
+        $groups = Group::paginate(10);
         return view('groups.index', ['groups' => $groups]);
     }
 
