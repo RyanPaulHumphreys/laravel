@@ -94,7 +94,12 @@
     padding: 10px;
 
 }
-.create-post-box
+.create-post-form-content
 {
-
+    width: 90%;
+    height: 20%;
+    padding: 12px 20px;
+    margin: 15px;
+    box-sizing: content-box;
+    resize: none;
 }

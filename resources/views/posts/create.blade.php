@@ -10,9 +10,10 @@
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/post.css" rel="stylesheet">
     <div class="create-post">
-        <form method="POST" class="create-post-form text-center" action="{{route('posts.store')}}">
+        <form method="POST" enctype="multipart/form-data" class="create-post-form text-center" action="{{route('posts.store')}}">
             @csrf
-            <p>Content: <input type="text" name="content"> </p>
+            <label for="content">Content</label>
+            <textarea id="content" name="content" placeholder="Write here..." class="create-post-form-content">  </textarea>
             <p>Group:
                 <select name="group_id">
                     <option value="{{null}}">General</option>
@@ -23,8 +24,9 @@
                     @endforeach
                 </select>
             </p>
-            <input class="submit" type="submit" value="Post">
-            <a class="back" href="{{route('posts.index')}}">Back</a>
+            <input type="file" id="image" name="image">
+            <input class="submit center" type="submit" value="Post">
+            <a class="back center" href="{{route('posts.index')}}">Back</a>
         </form>
     </div>
 </body>

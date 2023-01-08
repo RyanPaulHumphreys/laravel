@@ -22,13 +22,19 @@
                     </x-nav-link>
                 </div>
             </div>
-            @auth
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                            @auth
                             <div>{{ Auth::user()->name }}</div>
+                            @else
+                                <a href="{{ route('login') }}" class="text-sm text-gray-700 mx-auto dark:text-gray-500 underline">Log in</a>
+                                @if (Route::has('register'))
+                                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 mx-auto dark:text-gray-500 underline">Register</a>
+                                @endif
+                            @endauth
 
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -75,8 +81,10 @@
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
+                @auth
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
                 <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                @endauth
             </div>
 
             <div class="mt-3 space-y-1">
@@ -93,5 +101,4 @@
             </div>
         </div>
     </div>
-    @endif
 </nav>

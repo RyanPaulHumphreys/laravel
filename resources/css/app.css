@@ -9,19 +9,52 @@
 }
 .submit
 {
-    
-    padding: 3px;
-    background-color: greenyellow;
-}
+    display: block;
+	background: #3cff00 !important;
+	color: white;
+	border-style: outset;
+    border-radius: 5px;
+	border-color: #ffffff;
+	height: 40px;
+	width: 100px;
+	text-shadow: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
 
+}
+.submit:hover
+{
+    display: block;
+	background: #249900 !important;
+	color: white;
+	border-style: outset;
+    border-radius: 5px;
+	border-color: #ffffff;
+	height: 40px;
+	width: 100px;
+	text-shadow: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 .back
 {
-    padding: 3px;
+    display: block;
+    padding: 1px;
     background-color:crimson;
+    color: white;
+	border-style: outset;
+    border-radius: 5px;
+	border-color: #000000;
+	height: 40px;
+	width: 150px;
+	text-shadow: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .center
 {
-    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .text-center

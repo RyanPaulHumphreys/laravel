@@ -15,7 +15,16 @@
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">
-            {{ $slot }}
+            @include('layouts.navigation')
+            @if (isset($slot))
+                {{$slot}}
+            @endif
         </div>
+
+        <main>
+            <div>
+                @yield('content')
+            </div>
+        </main>
     </body>
 </html>

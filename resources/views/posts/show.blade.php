@@ -5,9 +5,9 @@
 
 @section('content')
 <head>
-    <div class="post">
-    <link href="/css/app.css" rel="stylesheet">
-        <div class="post-content">
+    <link href="/css/output.css" rel="stylesheet">
+    <div class="w-full h-2/4">
+        <div class="w-2/4 m-5 float-left">
             <ul>
                 <li class="bold">{{App\Models\User::find($post->user_id)->name}}</li>
                 <li>Posted: {{$post->created_at}}</li>
@@ -17,15 +17,15 @@
                 <li>{{$post->content}}</li>
             </ul>
         </div>
-        @if($post->image()->get()->first() != null)
+        <div class="w-1/4 float-right mr-10">
+            @if($post->image()->get()->first() != null)
                 <img src="{{$post->image()->get()->first()->src}}"/>   
-            </div>
-        @endif 
+            @endif 
+        </div>
     </div>
-    </div>  
 </head>
 <body>
-    <div class="comment-section">
+    <div class="h-1/2">
         <h2>Comments: </h2>
         <ul>
             @foreach ($comments as $comment)
