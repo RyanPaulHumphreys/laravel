@@ -20,4 +20,9 @@ class Image extends Model
     {
       return $this->belongsTo(Post::class);
     }
+
+    public function getsrc()
+    {
+      return $this->src .".". $this->mime_type;
+    }
 }
