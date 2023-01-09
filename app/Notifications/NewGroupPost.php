@@ -46,7 +46,7 @@ class NewGroupPost extends Notification
 
         return (new MailMessage)
                     ->line("A user posted in a group you're in.")
-                    ->action('See Post', url('/'));
+                    ->action('See the Post', $url);
     }
 
     /**

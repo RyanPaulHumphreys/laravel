@@ -43,7 +43,7 @@
                             </div>
                         </button>
                     </x-slot>
-
+                    @auth
                     <x-slot name="content">
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -56,6 +56,10 @@
                             </x-dropdown-link>
                         </form>
                     </x-slot>
+                    @else
+                    <x-slot name="content">
+                    </x-slot>
+                    @endauth
                 </x-dropdown>
             </div>
             <!-- Hamburger -->
