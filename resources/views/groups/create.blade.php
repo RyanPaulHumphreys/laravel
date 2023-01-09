@@ -5,6 +5,20 @@
 
 @section('content')
 <head>
+    <script>
+        $('#group-form').on('submit', function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: '/groups',
+                data: $(this).serialize(),
+                success: function(response) {
+                    console.log(response.group);
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <link href="/css/output.css" rel="stylesheet">
@@ -19,7 +33,7 @@
             </ul>
         </div>
         @endif
-        <form method="POST" enctype="multipart/form-data" class="create-post-form text-center" action="{{route('groups.store')}}">
+        <form method="POST" enctype="multipart/form-data" class="create-post-form text-center" id="group-form" action="/groups">
             @csrf
             <label for="content">Group name</label>
             <input type="text" id="name" name="name" placeholder="Write here..." class=""/>

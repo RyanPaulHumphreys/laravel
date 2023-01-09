@@ -5,6 +5,20 @@
 
 @section('content')
 <head>
+    <script>
+        $('#post-form').on('submit', function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: '/posts',
+                data: $(this).serialize(),
+                success: function(response) {
+                    console.log(response.post);
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <link href="/css/output.css" rel="stylesheet">
@@ -19,7 +33,7 @@
             </ul>
         </div>
         @endif
-        <form method="POST" enctype="multipart/form-data" class="create-post-form text-center" action="{{route('posts.store')}}">
+        <form method="POST" enctype="multipart/form-data" class="create-post-form text-center" action="/posts" id="post-form">
             @csrf
             <label for="content">Content</label>
             <textarea id="content" name="content" placeholder="Write here..." class="create-post-form-content">  </textarea>
