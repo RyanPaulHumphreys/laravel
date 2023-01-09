@@ -148,7 +148,7 @@ class PostController extends Controller
             ]
         );
         $p = Post::find($id);
-        $img = $p->image()->get()->first();
+        $img = ($p->image()->exists()) ? $p->image()->get()->first() : new Image;
 
         if (auth()->id() == $p->user_id || auth()->user()->role == "admin") {
 
@@ -159,7 +159,7 @@ class PostController extends Controller
                 $imgName = time() . '.' . $request['image']->extension();
 
                 $request->image->move(public_path('images'), $imgName);
-
+                
                 $img->src = asset('images') . "/" . $imgName;
                 $img->mime_type = $request->file('image')->getClientOriginalExtension();
                 $img->post_id = $p->id;
