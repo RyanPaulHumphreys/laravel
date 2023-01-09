@@ -796,6 +796,16 @@ select {
   margin-bottom: 1.25rem;
 }
 
+.mx-5 {
+  margin-left: 1.25rem;
+  margin-right: 1.25rem;
+}
+
+.mx-10 {
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+}
+
 .ml-3 {
   margin-left: 0.75rem;
 }
@@ -882,6 +892,10 @@ select {
 
 .ml-5 {
   margin-left: 1.25rem;
+}
+
+.ml-32 {
+  margin-left: 8rem;
 }
 
 .block {
@@ -1335,6 +1349,10 @@ select {
   padding: 1.25rem;
 }
 
+.p-10 {
+  padding: 2.5rem;
+}
+
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -1702,6 +1720,17 @@ select {
   text-shadow: none;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.delete
+{
+  display: inline;
+  background-color:crimson;
+  color: white;
+  border-style: outset;
+  border-radius: 5px;
+  border-color: #000000;
+  text-shadow: none;
 }
 
 .center

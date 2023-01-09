@@ -31,7 +31,7 @@
                 @if (Route::has('login'))
                 <div class="flex justify-center mt-4 pt-8 sm:justify-start sm:pt-0">
                     @auth
-                        <a href="{{ url('/posts') }}" class="text-8xl text-center mx-auto text-gray-700 dark:text-gray-500 underline">Continue</a>
+                        <a href="{{ url('/posts') }}" class="text-xl text-center mx-auto text-gray-700 dark:text-gray-500 hover:underline">Continue</a>
                     @endauth
                     @guest
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 mx-auto dark:text-gray-500 underline">Log in</a>

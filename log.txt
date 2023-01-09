@@ -1,0 +1,77 @@
+commit 81a852196353edc75639d472257ea2f981adc979
+Author: Ryan Humphreys <ryanpaulhumphreys@gmail.com>
+Date:   Mon Jan 9 00:01:13 2023 +0000
+
+    Implemented store and create function in group controller
+
+commit 0cc8ef0c04f88725d1d358030a4e5630f27f1014
+Author: Ryan Humphreys <ryanpaulhumphreys@gmail.com>
+Date:   Mon Jan 9 00:00:51 2023 +0000
+
+    Added user controller for profile views
+
+commit 53a9da2b2f4eb987a77032f6842e1adfcd51ecb4
+Author: Ryan Humphreys <ryanpaulhumphreys@gmail.com>
+Date:   Sun Jan 8 23:59:54 2023 +0000
+
+    Added post stub component and notifications
+
+commit 7b9b48cf53b47a73e1200476e1a1b30dbc1c1ed1
+Author: Ryan Humphreys <ryanpaulhumphreys@gmail.com>
+Date:   Sun Jan 8 23:58:40 2023 +0000
+
+    Altered views to fit new content
+
+commit 2994c3f4792db921a966df437f6f67df890e78a2
+Author: Ryan Humphreys <ryanpaulhumphreys@gmail.com>
+Date:   Sun Jan 8 23:57:30 2023 +0000
+
+    Added comment views controller and service provider
+
+commit 67bb2fd6c886af60d078c7845b52357abece0c7a
+Author: Ryan Humphreys <ryanpaulhumphreys@gmail.com>
+Date:   Sun Jan 8 23:55:37 2023 +0000
+
+    Made laravel notification files available
+
+commit eb69aacbeab388299250b45be1d7016797fa70c4
+Author: Ryan Humphreys <ryanpaulhumphreys@gmail.com>
+Date:   Sun Jan 8 11:50:04 2023 +0000
+
+    Added pagination to indexing of groups and posts
+
+commit c976c019978ebf5dd6142b10ca4ece25b968d694
+Author: Ryan Humphreys <ryanpaulhumphreys@gmail.com>
+Date:   Sun Jan 8 11:49:36 2023 +0000
+
+    Edited views to allow more to be seen by guests
+
+commit 985a82b7dfd44dec147f42e2fb8c3bc0f94ab46f
+Author: Ryan Humphreys <ryanpaulhumphreys@gmail.com>
+Date:   Fri Jan 6 18:09:22 2023 +0000
+
+    Altered post views and added stylesheets
+
+commit 4f3a0b4592112b5c28514d6543538f8bd81eece8
+Author: Ryan Humphreys <ryanpaulhumphreys@gmail.com>
+Date:   Fri Jan 6 18:08:42 2023 +0000
+
+    Added image model/seeder/factory
+
+commit a252ef8e18bcdb980a7487ba14096b30ef74083a
+Author: Ryan Humphreys <ryanpaulhumphreys@gmail.com>
+Date:   Thu Jan 5 13:37:47 2023 +0000
+
+    Added views and controllers
+
+commit 732b4a274c4896b5491d3569af0fef1d1043cdda
+Author: Ryan Humphreys <ryanpaulhumphreys@gmail.com>
+Date:   Sat Nov 5 21:47:46 2022 +0000
+
+    Defined post class and related foreign key to user, added posts and user seeders + created user and post factories
+
+commit b0989a6a85760a0d070e232b155084ea677fbc23
+Author: Ryan Humphreys <ryanpaulhumphreys@gmail.com>
+Date:   Sat Nov 5 18:48:35 2022 +0000
+
+    Initial commit w/ breeze
