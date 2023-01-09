@@ -24,12 +24,22 @@
         <div class="w-1/4 float-right mr-10">
         </div>
     </div>
-    <div class="w-50 float-left m-10">
-        <ul>
+    <div class="w-1/2 float-left m-10">
+        <ul class="h-1/2 m-5 bg-amber-200">
             <h1 class="text-xl">Posts: </h1>
-            @foreach($posts as $post)
-                <x-post-stub :post=$post/>
-            @endforeach
+            @if($posts->count() == 0)
+                <h1 class="text-xl">No posts yet </h1>
+            @else
+                @foreach($posts as $post)
+                    <x-post-stub :post=$post/>
+                @endforeach
+            @endif
+        </ul>
+    </div>
+
+    <div class="w-2/5 float-right m-10">
+        <ul>
+            <x-comment-section :comments=$comments :post=null/>
         </ul>
     </div>
 </head>

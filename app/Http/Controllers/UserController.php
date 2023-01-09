@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Comment;
 
 class UserController extends Controller
 {
@@ -48,8 +49,9 @@ class UserController extends Controller
     public function show($id)
     {
         //
+        $comments = Comment::where('user_id', $id)->paginate(10);
         $posts = Post::where('user_id', $id)->get();
-        return view('users.show', ['user' => User::find($id), 'posts' => $posts]);
+        return view('users.show', ['user' => User::find($id), 'posts' => $posts, 'comments' => $comments]);
     }
 
     /**
