@@ -18,8 +18,9 @@ class ImageFactory extends Factory
     {
         return [
             //
-            'src' => fake()->imageUrl($width=640, $height=480),
-            'mime_type' => 'image/jpeg',
+            //'src' => asset('images')."/placeholder.jpg",
+            'src' => fake()->imageUrl(480,480),
+            'mime_type' => 'jpg',
             'description' => fake()->sentence(),
             'alt' => fake()->sentence()
         ];
