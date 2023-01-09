@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Group;
 use App\Models\User;
+use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -35,6 +36,7 @@ class GroupController extends Controller
     public function create()
     {
         //
+        return view('groups.create');
     }
 
     /**
@@ -46,6 +48,23 @@ class GroupController extends Controller
     public function store(Request $request)
     {
         //
+        $validData = $request->validate(
+            [
+                'name' => 'required|max:128|unique:groups,name',
+                'isPrivate' => 'nullable|boolean'
+            ]
+        );
+
+        $g = new Group;
+        $g->name = $validData['name'];
+        if ($request['isPrivate'] == null)
+            $g->isPrivate = false;
+        else
+            $g->isPrivate = $validData['isPrivate'];
+        $g->save();
+
+        session()->flash('message', 'Group created');
+        return redirect()->route('groups.index');
     }
 
     /**
@@ -57,7 +76,8 @@ class GroupController extends Controller
     public function show(Group $group)
     {
         //
-        return view('groups.show', ['group' => $group]);
+        $posts = Post::where('group_id', $group->id)->get();
+        return view('groups.show', ['group' => $group, 'posts' => $posts]);
     }
 
     /**
